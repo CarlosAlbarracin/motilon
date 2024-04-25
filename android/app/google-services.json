@@ -1,0 +1,127 @@
+{
+  "project_info": {
+    "project_number": "651085286519",
+    "firebase_url": "https://motilon-83f78.firebaseio.com",
+    "project_id": "motilon-83f78",
+    "storage_bucket": "motilon-83f78.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:651085286519:android:1fba65553dc65522214a72",
+        "android_client_info": {
+          "package_name": "com.example.motilon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "651085286519-du1g9n3p3b4gff3id29g03lq7mnop6g2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAYfNGuogu5EaWKakqmAfTHFHDuY2av6o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "651085286519-8fmnhadvo9fibt4gr5k3jdoplubk71ds.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "651085286519-06eivvdv58om5g2dbh1qhlhoakn74589.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.platziFlutter"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:651085286519:android:5e61e55a732710e8214a72",
+        "android_client_info": {
+          "package_name": "com.example.platzi_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "651085286519-f7aatrvpuempka3tvsmrfn6psf08565t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.platzi_flutter",
+            "certificate_hash": "5af8b26bf27bb0d0fa43566cb7ca11a73d48b773"
+          }
+        },
+        {
+          "client_id": "651085286519-du1g9n3p3b4gff3id29g03lq7mnop6g2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAYfNGuogu5EaWKakqmAfTHFHDuY2av6o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "651085286519-8fmnhadvo9fibt4gr5k3jdoplubk71ds.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "651085286519-06eivvdv58om5g2dbh1qhlhoakn74589.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.platziFlutter"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:651085286519:android:db4403ed227b0b98214a72",
+        "android_client_info": {
+          "package_name": "com.example.travel_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "651085286519-du1g9n3p3b4gff3id29g03lq7mnop6g2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAYfNGuogu5EaWKakqmAfTHFHDuY2av6o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "651085286519-8fmnhadvo9fibt4gr5k3jdoplubk71ds.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "651085286519-06eivvdv58om5g2dbh1qhlhoakn74589.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.platziFlutter"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
