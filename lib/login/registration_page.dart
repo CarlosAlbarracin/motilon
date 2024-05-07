@@ -1,4 +1,5 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -95,8 +96,18 @@ class _RegistrationPageState extends State<RegistrationPage>{
                 onPressed: () async {
                   try {
                     await FirebaseAuthService().signup(
+                      
                         _emailController.text.trim(),
                         _passwordController.text.trim());
+                       // Después de iniciar sesión
+   // Obtener el ID del usuario registrado
+    String userId = FirebaseAuth.instance.currentUser!.uid;
+
+    // Guardar el nombre de usuario en Firestore
+    await FirebaseFirestore.instance.collection('users').doc(userId).set({
+      'name': _usernameController.text.trim(),
+      // Otros datos del usuario si los tienes
+    });
 
                     if (!mounted) return;
 

@@ -25,5 +25,17 @@ RutaTuristica miRuta = RutaTuristica(
     'Paso 3: Pamplona',
    
   ],
+  
     
 );
+RutaTuristica segundaRuta = RutaTuristica(
+  videoUrl: 'https://www.youtube.com/watch?v=your_video_id',
+  titulo: 'Ruta de las Orquídeas',
+  descripcion: 'Explora la exuberante belleza de la flora de nuestra región en esta fascinante ruta. Desde los bosques de niebla hasta las selvas tropicales, descubre una increíble variedad de orquídeas en su hábitat natural. Esta ruta te llevará a través de senderos serpenteantes y cascadas escondidas, ofreciéndote la oportunidad de maravillarte con la diversidad de colores y formas de estas hermosas flores.',
+  pasos: [
+    'Paso 1: Parque Nacional Natural Los Nevados',
+    'Paso 2: Jardín Botánico de Bogotá',
+    'Paso 3: Reserva Natural La Planada',
+  ],
+);
+

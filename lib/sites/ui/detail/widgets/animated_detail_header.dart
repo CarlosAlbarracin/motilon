@@ -208,20 +208,9 @@ class _LikesAndSharesContainer extends StatelessWidget {
               CupertinoIcons.heart,
               size: 26,
             ),
-            label: Text(place.likes.toString()),
+            label: Text(place.isFavorite.toString()),
           ),
-          TextButton.icon(
-            onPressed: () {},
-            style: TextButton.styleFrom(
-              foregroundColor: Colors.black, textStyle: context.subtitle1,
-              shape: const StadiumBorder(),
-            ),
-            icon: const Icon(
-              CupertinoIcons.reply,
-              size: 26,
-            ),
-            label: Text(place.shared.toString()),
-          ),
+        
           const Spacer(),
           TextButton.icon(
             onPressed: () {},

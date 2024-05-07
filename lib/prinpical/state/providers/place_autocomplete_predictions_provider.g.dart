@@ -30,9 +30,6 @@ class _SystemHash {
   }
 }
 
-typedef PlaceAutocompletePredictionsRef
-    = AutoDisposeFutureProviderRef<List<PlaceAutocompletePrediction>>;
-
 /// See also [placeAutocompletePredictions].
 @ProviderFor(placeAutocompletePredictions)
 const placeAutocompletePredictionsProvider =
@@ -82,10 +79,10 @@ class PlaceAutocompletePredictionsProvider
     extends AutoDisposeFutureProvider<List<PlaceAutocompletePrediction>> {
   /// See also [placeAutocompletePredictions].
   PlaceAutocompletePredictionsProvider(
-    this.input,
-  ) : super.internal(
+    String input,
+  ) : this._internal(
           (ref) => placeAutocompletePredictions(
-            ref,
+            ref as PlaceAutocompletePredictionsRef,
             input,
           ),
           from: placeAutocompletePredictionsProvider,
@@ -97,9 +94,46 @@ class PlaceAutocompletePredictionsProvider
           dependencies: PlaceAutocompletePredictionsFamily._dependencies,
           allTransitiveDependencies:
               PlaceAutocompletePredictionsFamily._allTransitiveDependencies,
+          input: input,
         );
 
+  PlaceAutocompletePredictionsProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.input,
+  }) : super.internal();
+
   final String input;
+
+  @override
+  Override overrideWith(
+    FutureOr<List<PlaceAutocompletePrediction>> Function(
+            PlaceAutocompletePredictionsRef provider)
+        create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: PlaceAutocompletePredictionsProvider._internal(
+        (ref) => create(ref as PlaceAutocompletePredictionsRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        input: input,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<List<PlaceAutocompletePrediction>>
+      createElement() {
+    return _PlaceAutocompletePredictionsProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -115,4 +149,20 @@ class PlaceAutocompletePredictionsProvider
     return _SystemHash.finish(hash);
   }
 }
-// ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
+
+mixin PlaceAutocompletePredictionsRef
+    on AutoDisposeFutureProviderRef<List<PlaceAutocompletePrediction>> {
+  /// The parameter `input` of this provider.
+  String get input;
+}
+
+class _PlaceAutocompletePredictionsProviderElement
+    extends AutoDisposeFutureProviderElement<List<PlaceAutocompletePrediction>>
+    with PlaceAutocompletePredictionsRef {
+  _PlaceAutocompletePredictionsProviderElement(super.provider);
+
+  @override
+  String get input => (origin as PlaceAutocompletePredictionsProvider).input;
+}
+// ignore_for_file: type=lint
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

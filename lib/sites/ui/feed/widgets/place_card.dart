@@ -8,10 +8,10 @@ import 'package:motilon/sites/ui/widgets/gradient_status_tag.dart';
 
 class PlaceCard extends StatelessWidget {
   const PlaceCard({
-    super.key,
+    Key? key,
     required this.place,
     required this.onPressed,
-  });
+  }) : super(key: key);
 
   final TravelPlace place;
   final VoidCallback onPressed;
@@ -32,6 +32,7 @@ class PlaceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     final statusTag = place.statusTag;
     return InkWell(
       onTap: onPressed,
@@ -42,7 +43,6 @@ class PlaceCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-           
             const Spacer(),
             Text(place.name, style: context.headline2),
             const SizedBox(height: 10),
@@ -56,73 +56,38 @@ class PlaceCard extends StatelessWidget {
   }
 }
 
-class _ActionButtons extends StatelessWidget {
-  const _ActionButtons({required this.place});
-
+class _ActionButtons extends StatefulWidget {
   final TravelPlace place;
 
+  const _ActionButtons({required this.place});
+
   @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        TextButton.icon(
-          onPressed: () {},
-          style: TextButton.styleFrom(
-            foregroundColor: Colors.white, shape: const StadiumBorder(),
-          ),
-          icon: const Icon(CupertinoIcons.heart),
-          label: Text(place.likes.toString()),
-        ),
-        TextButton.icon(
-          onPressed: () {},
-          style: TextButton.styleFrom(
-            foregroundColor: Colors.white, shape: const StadiumBorder(),
-          ),
-          icon: const Icon(CupertinoIcons.reply),
-          label: Text(place.shared.toString()),
-        )
-      ],
-    );
-  }
+  _ActionButtonsState createState() => _ActionButtonsState();
 }
 
-// ignore: unused_element
-class _UserInformationRow extends StatelessWidget {
-  const _UserInformationRow({required this.subtitle});
-
-  final TravelUser subtitle;
-
+class _ActionButtonsState extends State<_ActionButtons> {
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        
-        const SizedBox(width: 10),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              subtitle.name,
-              style: context.bodyText1.copyWith(
-                color: Colors.white,
-              ),
-            ),
-            Text(
-              '',
-              style: context.bodyText1.copyWith(
-                color: Colors.white70,
-              ),
-            ),
-          ],
-        ),
-        const Spacer(),
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            Icons.more_horiz,
-            color: Colors.white,
+        TextButton.icon(
+          onPressed: () {
+            setState(() {
+              // Cambia el estado de isFavorite
+              widget.place.isFavorite = !widget.place.isFavorite;
+            });
+          },
+          style: TextButton.styleFrom(
+            foregroundColor: Colors.white,
+            shape: const StadiumBorder(),
           ),
-        )
+          icon: Icon(
+            widget.place.isFavorite ? CupertinoIcons.heart_fill : CupertinoIcons.heart,
+            color: widget.place.isFavorite ? Colors.red : null,
+          ),
+          label: Text('Favorite'),
+        ),
+       
       ],
     );
   }

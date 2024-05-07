@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
+
 import 'package:motilon/mapa/animated_market_map.dart';
 import 'package:motilon/prinpical/main.dart';
-import 'package:motilon/prinpical/screens/home_screen.dart';
+
 
 //import 'package:motilon/agencia/agencia/explore.dart';
 
@@ -12,9 +13,9 @@ import 'package:motilon/profile/profile.dart';
 import 'package:motilon/restaurants/view/home.dart';
 import 'package:motilon/sites/travel_app.dart';
 
-import '../menu/models/place.dart';
 import '../menu/views/pages/favorite_class.dart';
-import '../menu/views/pages/favorite_page.dart';
+import '../sites/ui/feed/widgets/favorite.dart';
+
 
 //import 'package:motilon/restaurants/view/home.dart';
 //import 'package:motilon/sites/travel_app.dart';
@@ -25,7 +26,7 @@ class NavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FavoritePlacesManager favoritePlacesManager = FavoritePlacesManager();
+
        UserData userData = UserData(
       name: 'Carlos Albarracin',
       email: 'albarracincarlos58@gmail.com',
@@ -78,28 +79,8 @@ class NavBar extends StatelessWidget {
                       ));
             },
           ),
-         /*ListTile(
-            leading: const Icon(Icons.holiday_village),
-            title: const Text('Agencia'),
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const Agencia(),
-                      ));
-            },
-          ),*/
-           ListTile(
-            leading: const Icon(Icons.public),
-            title: const Text('Favoritos'),
-            onTap: (){
-               Navigator.of(context).push(   MaterialPageRoute(
-     builder: (context) => FavoritePlacesScreen(
-  favoritePlacesManager: favoritePlacesManager,
-  places: places,
-  
-),
-  ),);
-            } 
-          ),
+       
+     
           ListTile(
             leading: const Icon(Icons.food_bank),
             title: const Text('Restaurantes'),
@@ -118,6 +99,16 @@ class NavBar extends StatelessWidget {
                       ));
             } 
           ),
+           ListTile(
+            leading: const Icon(Icons.food_bank),
+            title: const Text('Favoritos'),
+            onTap: (){
+               Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) =>  FavoritePlacesScreen(),
+                      ));
+            } 
+          ),
+        
           const Divider(),
           ListTile(
             leading: const Icon(Icons.settings),

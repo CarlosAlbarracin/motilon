@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 class TravelPlace {
   TravelPlace({
     required this.name,
@@ -8,8 +9,10 @@ class TravelPlace {
     this.description = '',
     this.locationDesc = '',
     this.statusTag = StatusTag.popular,
-    this.shared = 0,
-    this.likes = 0,
+    
+    this.isFavorite = false,
+
+   
   });
 
   final String id;
@@ -17,19 +20,36 @@ class TravelPlace {
   final String subtitle;
   final TravelUser user;
   final StatusTag statusTag;
-  final int shared;
-  final int likes;
+  
+  bool isFavorite; 
   final String locationDesc;
   final String description;
   final List<String> imagesUrl;
+   static List<TravelPlace> getFavoritePlaces(List<TravelPlace> places) {
+    return places.where((place) => place.isFavorite).toList();
+  }
+  factory TravelPlace.fromFirestore(DocumentSnapshot doc) {
+    Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+    return TravelPlace(
+      id: doc.id,
+      name: data['name'] ?? '',
+      subtitle: data['subtitle'] ?? '',
+      user: data['user'] ?? TravelUser.users, // Aquí debes tener una forma de convertir los datos del usuario en un objeto TravelUser
+      imagesUrl: List<String>.from(data['imagesUrl'] ?? []),
+      description: data['description'] ?? '',
+      locationDesc: data['locationDesc'] ?? '',
+      statusTag: StatusTag.popular, // Puedes establecer un valor predeterminado o leerlo del document: d'] ?? 0,
+      isFavorite: data['isFavorite'] ?? false,
+    );
+  }
 
   static final place = [
+    
     TravelPlace(
       id: '1',
       name: 'Chinacota',
       subtitle: 'Chinacota',
-      likes: 500,
-      shared: 240,
+      isFavorite: false,
       description:
           'Chinacota tierra merecedora de ser considerada "La Casa de Todos" gracias a la belleza de sus paisajes,'
           'donde la naturaleza se conjuga en esencial armonia con los paraisos de descanso y recreacion que posee. Al ingresar al municipio se puede observar como este es un inmenso jardin, '
@@ -46,8 +66,7 @@ class TravelPlace {
       id: '2',
       name: 'Pamplona',
       subtitle: 'Pamplona',
-      likes: 140,
-      shared: 49,
+      isFavorite: false,
       description:
           'Pamplona es un municipio ubicado en el departamento de Norte de Santander, Colombia.  '
           'Es conocido por su arquitectura colonial y su hermoso centro histórico. La ciudad está rodeada de montañas y cuenta con un clima agradable. '
@@ -64,8 +83,7 @@ class TravelPlace {
     ),
     TravelPlace(
       id: '3',
-      likes: 29,
-      shared: 40,
+      isFavorite: false,
       name: 'ocaña',
       subtitle: 'Ocaña',
       description:
@@ -83,8 +101,7 @@ class TravelPlace {
       id: '4',
       name: 'Cucuta',
       subtitle: 'Cucuta',
-      shared: 500,
-      likes: 39,
+      isFavorite: false,
       description:
           'Cúcuta es la capital del departamento de Norte de Santander, Colombia. Es una ciudad fronteriza, limitando con Venezuela. Cúcuta es reconocida como un importante centro comercial y de negocios, con una amplia oferta de servicios y actividades económicas.'
           'La ciudad cuenta con una rica historia, con monumentos y sitios de interés como la Catedral de San José y el Puente Internacional Simón Bolívar.'
@@ -102,8 +119,7 @@ class TravelPlace {
       id: '5',
       name: 'Cacota',
       subtitle: 'Cacota',
-      likes: 140,
-      shared: 49,
+      isFavorite: false,
       description:
           ' Cácota es un municipio situado en el departamento de Norte de Santander, Colombia. Es conocido por su hermoso entorno natural, con paisajes montañosos y una gran diversidad de flora y fauna. '
           ' El municipio cuenta con varios atractivos turísticos, como el Parque Natural Regional El Tamá y la Laguna de Cácota. '
@@ -121,8 +137,7 @@ class TravelPlace {
       id: '6',
       name: 'Bochalema',
       subtitle: 'Bochalema',
-      likes: 140,
-      shared: 49,
+      isFavorite: false,
       description:
           'Bochalema es un municipio colombiano ubicado en el departamento de Norte de Santander. Es reconocido por su producción agrícola, especialmente de caña de azúcar y productos derivados. '
           ' Bochalema cuenta con hermosos paisajes rurales, con extensas plantaciones y montañas. '
@@ -140,8 +155,7 @@ class TravelPlace {
       id: '7',
       name: 'Villa del Rosario',
       subtitle: 'Villa del Rosario',
-      likes: 140,
-      shared: 49,
+      isFavorite: false,
       description:
           'Villa del Rosario es una localidad situada en el departamento de Norte de Santander, Colombia. Es reconocida por su importancia histórica como cuna de la independencia de Colombia.'
           'En este municipio se encuentra el Santuario de Nuestra Señora de la Laja, un importante lugar de peregrinación. Villa del Rosario cuenta también con un hermoso centro histórico, con calles empedradas y casas coloniales. '
@@ -159,8 +173,7 @@ class TravelPlace {
       id: '8',
       name: 'Salazar',
       subtitle: 'salazar',
-      likes: 140,
-      shared: 49,
+      isFavorite: false,
       description:
           'Salazar es un municipio situado en el departamento de Norte de Santander, Colombia. Es conocido por su producción agrícola, en particular de café y productos lácteos.'
           'Salazar cuenta con un hermoso entorno natural, con montañas y ríos. Además, en el municipio se celebran festividades como la Feria Agropecuaria y Artesanal de Salazar y la Fiesta de la Empanada.'
@@ -178,8 +191,7 @@ class TravelPlace {
       id: '9',
       name: 'Durania',
       subtitle: 'Durania',
-      likes: 140,
-      shared: 49,
+      isFavorite: false,
       description:
           'Durania es un municipio colombiano ubicado en el departamento de Norte de Santander. Se caracteriza por su belleza natural, con paisajes montañosos y una gran diversidad de flora y fauna. '
           'El municipio cuenta con varias cascadas y ríos, ideales para realizar actividades al aire libre como senderismo y ecoturismo. '
@@ -197,8 +209,7 @@ class TravelPlace {
       id: '10',
       name: 'Labateca',
       subtitle: 'Labateca',
-      likes: 14,
-      shared: 49,
+      isFavorite: false,
       description:
           'Labateca es un municipio colombiano ubicado en el departamento de Norte de Santander. Es reconocido por su belleza natural y su clima agradable.'
           'El municipio cuenta con paisajes montañosos y áreas protegidas, como el Parque Nacional Natural Tamá.'

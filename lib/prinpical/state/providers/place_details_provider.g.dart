@@ -29,8 +29,6 @@ class _SystemHash {
   }
 }
 
-typedef PlaceDetailsRef = AutoDisposeFutureProviderRef<(Place, PhotoImage)>;
-
 /// See also [placeDetails].
 @ProviderFor(placeDetails)
 const placeDetailsProvider = PlaceDetailsFamily();
@@ -81,11 +79,11 @@ class PlaceDetailsProvider
     extends AutoDisposeFutureProvider<(Place, PhotoImage)> {
   /// See also [placeDetails].
   PlaceDetailsProvider(
-    this.address,
-    this.latLng,
-  ) : super.internal(
+    String address,
+    LatLng latLng,
+  ) : this._internal(
           (ref) => placeDetails(
-            ref,
+            ref as PlaceDetailsRef,
             address,
             latLng,
           ),
@@ -98,10 +96,47 @@ class PlaceDetailsProvider
           dependencies: PlaceDetailsFamily._dependencies,
           allTransitiveDependencies:
               PlaceDetailsFamily._allTransitiveDependencies,
+          address: address,
+          latLng: latLng,
         );
+
+  PlaceDetailsProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.address,
+    required this.latLng,
+  }) : super.internal();
 
   final String address;
   final LatLng latLng;
+
+  @override
+  Override overrideWith(
+    FutureOr<(Place, PhotoImage)> Function(PlaceDetailsRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: PlaceDetailsProvider._internal(
+        (ref) => create(ref as PlaceDetailsRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        address: address,
+        latLng: latLng,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<(Place, PhotoImage)> createElement() {
+    return _PlaceDetailsProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -119,4 +154,24 @@ class PlaceDetailsProvider
     return _SystemHash.finish(hash);
   }
 }
-// ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
+
+mixin PlaceDetailsRef on AutoDisposeFutureProviderRef<(Place, PhotoImage)> {
+  /// The parameter `address` of this provider.
+  String get address;
+
+  /// The parameter `latLng` of this provider.
+  LatLng get latLng;
+}
+
+class _PlaceDetailsProviderElement
+    extends AutoDisposeFutureProviderElement<(Place, PhotoImage)>
+    with PlaceDetailsRef {
+  _PlaceDetailsProviderElement(super.provider);
+
+  @override
+  String get address => (origin as PlaceDetailsProvider).address;
+  @override
+  LatLng get latLng => (origin as PlaceDetailsProvider).latLng;
+}
+// ignore_for_file: type=lint
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

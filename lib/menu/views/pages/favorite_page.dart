@@ -4,12 +4,12 @@ import 'package:motilon/menu/views/pages/favorite_class.dart';
 
 class FavoritePlacesScreen extends StatelessWidget {
   final FavoritePlacesManager favoritePlacesManager;
-  final List<Place> places;
+  final List<Place> plac;
 
   const FavoritePlacesScreen({
     Key? key,
     required this.favoritePlacesManager,
-    required this.places,
+    required this.plac,
   }) : super(key: key);
 
   @override

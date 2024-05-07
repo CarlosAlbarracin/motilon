@@ -7,7 +7,7 @@ part of 'user_current_location_provider.dart';
 // **************************************************************************
 
 String _$userCurrentLocationHash() =>
-    r'27a349f3c9e50c7df317f8a8c89fbac79ae24c47';
+    r'12933d38669d9256868d3b89b80f00b25012b88e';
 
 /// See also [userCurrentLocation].
 @ProviderFor(userCurrentLocation)
@@ -22,4 +22,5 @@ final userCurrentLocationProvider = AutoDisposeFutureProvider<String?>.internal(
 );
 
 typedef UserCurrentLocationRef = AutoDisposeFutureProviderRef<String?>;
-// ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
+// ignore_for_file: type=lint
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

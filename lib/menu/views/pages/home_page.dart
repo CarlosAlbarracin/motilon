@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:motilon/components/busqueda_datos_delegate.dart';
 
@@ -23,6 +25,35 @@ class HomePage extends StatefulWidget {
 
 
 class _HomePageState extends State<HomePage> {
+ final FirebaseAuth _auth = FirebaseAuth.instance;
+  String? userId;
+
+  @override
+  void initState() {
+    super.initState();
+    _getCurrentUserId();
+  }
+
+ void _getCurrentUserId() async {
+  User? user = _auth.currentUser;
+  if (user != null) {
+    // Obtener el ID del usuario actual
+    userId = user.uid;
+
+    // Obtener el nombre de usuario desde Firestore
+    DocumentSnapshot snapshot =
+        await FirebaseFirestore.instance.collection('users').doc(userId).get();
+    if (snapshot.exists) {
+      // Especifica el tipo de datos devuelto por snapshot.data() como Map<String, dynamic>
+      Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+
+      setState(() {
+        // Accede al nombre de usuario usando la clave 'name'
+        userId = data['name'];
+      });
+    }
+  }
+}
   
   FavoritePlacesManager favoritePlacesManager = FavoritePlacesManager();
    
@@ -103,28 +134,24 @@ void navigateToRoute(BuildContext context, int index) {
               children: [
                 Row(
                   children: [
-                    Container(
-                      height: 50,
-                      width: 50,
-                      decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              image: AssetImage('assets/user.jpg'),
-                              fit: BoxFit.cover)),
-                    ),
+               
                     const SizedBox(
                       width: 15,
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Hola Carlos,',
-                          style: textStyle2,
-                        ),
-                       
-                      ],
-                    ),
+                  Column(
+  crossAxisAlignment: CrossAxisAlignment.start,
+  children: [
+    Text(
+      'Hola Carlos,',
+      style: textStyle2,
+    ),
+    const SizedBox(height: 10), // Agrega un espacio entre el saludo y el ID del usuario
+    Text(
+      userId != null ? ' $userId' : 'Usuario no autenticado',
+      style: TextStyle(fontSize: 16, color: Colors.grey),
+    ),
+  ],
+),
                   ],
                 ),
                 

@@ -31,6 +31,8 @@ class _LoginPageState extends State<LoginPage>{
   Widget build(BuildContext context) {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final User? currentUser = FirebaseAuth.instance.currentUser;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
