@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:motilon/restaurantes/models/place.dart';
+import 'package:motilon/restaurantes/ui/detail/widgets/animated_detail_header.dart';
 import 'package:motilon/sites/extensions/text_theme_x.dart';
 import 'package:motilon/sites/models/place.dart';
 import 'package:motilon/sites/ui/detail/widgets/animated_detail_header.dart';
@@ -6,21 +8,21 @@ import 'package:motilon/sites/ui/detail/widgets/place_comments_widget.dart';
 import 'package:motilon/sites/ui/widgets/translate_animation.dart';
 
 
-class PlaceDetailScreen extends StatefulWidget {
-  const PlaceDetailScreen({
+class PlaceDetailScreenR extends StatefulWidget {
+  const PlaceDetailScreenR({
     super.key,
-    required this.place,
+    required this.placeR,
     required this.screenHeight,
   });
 
-  final TravelPlace place;
+  final RestaurantPlace placeR;
   final double screenHeight;
 
   @override
-  State<PlaceDetailScreen> createState() => _PlaceDetailScreenState();
+  State<PlaceDetailScreenR> createState() => _PlaceDetailScreenRState();
 }
 
-class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
+class _PlaceDetailScreenRState extends State<PlaceDetailScreenR> {
   late ScrollController _controller;
   late ValueNotifier<double> bottomPercentNotifier;
   final bool _isAnimatingScroll = false;
@@ -68,10 +70,10 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
                     minExtent: 240,
                     builder: (percent) {
                       final bottomPercent = (percent / .3).clamp(0.0, 1.0);
-                      return AnimatedDetailHeader(
+                      return AnimatedDetailHeaderR(
                         topPercent: ((1 - percent) / .7).clamp(0.0, 1.0),
                         bottomPercent: bottomPercent,
-                        place: widget.place,
+                        place: widget.placeR,
                       );
                     },
                   ),
@@ -94,7 +96,7 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
                               ),
                               Flexible(
                                 child: Text(
-                                  widget.place.locationDesc,
+                                  widget.placeR.locationDesc,
                                   style: context.bodyText1
                                       .copyWith(color: Colors.blue),
                                   maxLines: 1,
@@ -104,17 +106,13 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
                             ],
                           ),
                           const SizedBox(height: 10),
-                          Text(widget.place.description),
+                          Text(widget.placeR.description),
                          
                           const SizedBox(height: 20),
                           const Text(
                             'Servicio',
                             style: TextStyle(fontWeight: FontWeight.bold),
-                            
                           ),
-                           const SizedBox(height: 10),
-                          Text(widget.place.items),
-                          const SizedBox(height: 50),
                         ],
                       ),
                     ),

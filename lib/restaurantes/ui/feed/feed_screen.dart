@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:motilon/sites/models/place.dart';
+import 'package:motilon/restaurantes/models/place.dart';
+import 'package:motilon/restaurantes/models/place.dart';
+import 'package:motilon/restaurantes/ui/detail/place_detail_screen.dart';
+import 'package:motilon/restaurantes/ui/feed/widgets/place_card.dart';
 import 'package:motilon/sites/ui/detail/place_detail_screen.dart';
 import 'package:motilon/sites/ui/feed/widgets/place_card.dart';
 import 'package:motilon/sites/ui/feed/widgets/travel_navigation_bar.dart';
@@ -27,25 +30,25 @@ class FeedScreen extends StatelessWidget {
         ],
       ),
       body: ListView.builder(
-        itemCount: TravelPlace.place.length,
+        itemCount: RestaurantPlace.placeR.length,
         itemExtent: 350,
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.fromLTRB(20, 0, 20, kToolbarHeight + 20),
         itemBuilder: (context, index) {
-          final place = TravelPlace.place[index];
+          final placeR = RestaurantPlace.placeR[index];
           return Hero(
-            tag: place.id,
+            tag: placeR.id,
             child: Material(
-              child: PlaceCard(
-                place: place,
+              child: PlaceCardR(
+                placeR: placeR,
                 onPressed: () async {
                   Navigator.push(
                     context,
                     PageRouteBuilder<dynamic>(
                       pageBuilder: (_, animation, __) => FadeTransition(
                         opacity: animation,
-                        child: PlaceDetailScreen(
-                          place: place,
+                        child: PlaceDetailScreenR(
+                          placeR: placeR,
                           screenHeight: MediaQuery.of(context).size.height,
                         ),
                       ),

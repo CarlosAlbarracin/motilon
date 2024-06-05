@@ -107,9 +107,9 @@ class _PointsOfInterestScreenState
                                     Theme.of(context).textTheme.headlineSmall,
                               ),
                               const SizedBox(height: 4),
-                              Text(
-                                destination.description,
-                                style: Theme.of(context).textTheme.bodyMedium,
+                              const Text(
+                                ''
+                                
                               ),
                             ],
                           ),

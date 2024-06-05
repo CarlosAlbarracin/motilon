@@ -52,21 +52,21 @@ class Destination {
           name: 'Parque de pamplona',
           latLng: LatLng(7.376149,-72.6532817),
           description:
-              'World-famous statue gifted by France as a symbol of freedom.',
+              'Ubicado en el centro de Pamplona, es un espacio público bautizado en homenaje a Águeda Gallardo de Villamizar, la mujer que el 4 de julio de 1810 proclamó la Independencia de Pamplona.',
         ),
         PointOfInterest(
           id: 'p2',
           name: 'Cristo Rey',
           latLng: LatLng(7.3806004,-72.6400502),
           description:
-              'Urban oasis with ball fields, a zoo, & a carousel, plus formal gardens & more.',
+              'Probablemente el mejor mirador de la ciudad accesible en bus. Desde allí se puede observar una espectacular vista panorámica de toda Pamplona.',
         ),
         PointOfInterest(
           id: 'p3',
           name: 'Catedral Santa Clara',
           latLng: LatLng(7.3746679,-72.6499822),
           description:
-              'Bustling destination in the heart of the Theater District known for bright lights, shopping & shows.',
+              'Es una de las más antiguas y joya arquitectónica de la ciudad. Durante su festividad religiosa se reúne el gremio de transportadores de la región y feligreses para venerar a su patrona cada 16 de julio',
         ),
       ],
     ),
@@ -78,10 +78,10 @@ class Destination {
       imageUrl:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7npiE2MLWrTAWe99FOZMvIRlall9g7XvUAxePpQBPCg&s',
       additionalImages: [
-        'https://images.unsplash.com/photo-1431274172761-fca41d930114?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
-        'https://images.unsplash.com/photo-1431274172761-fca41d930114?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
-        'https://images.unsplash.com/photo-1431274172761-fca41d930114?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
-        'https://images.unsplash.com/photo-1431274172761-fca41d930114?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Columna_de_los_esclavos_y_torre_catedral_Santa_Ana.JPG/220px-Columna_de_los_esclavos_y_torre_catedral_Santa_Ana.JPG',
+        'https://cdn.colombia.com/sdi/2022/03/18/ocana-atractivo-santander-1008422.jpg',
+        'https://www.laopinion.co/sites/default/files/2021-11/Turismo-Oca%C3%B1a.jpg',
+        'https://miocana.com/wp-content/uploads/elementor/thumbs/mi.ocana_275948665_667187864514202_5792741380568209741_n-1-ql85wleyxi3sshrj80g8j3afyl7sdf0610nds2qgrc.jpg',
       ],
       rating: 4.7,
       numReviews: 1390,
@@ -91,21 +91,21 @@ class Destination {
           name: 'Los Estoraques Unique Natural Area',
           latLng: LatLng(8.2200407,-73.2395254),
           description:
-              'Iconic wrought-iron lattice tower offering expansive views of Paris.',
+              'El Área Natural Única Los Estoraques es uno de los parques nacionales más pequeños, con una superficie de solo 6 km², ubicado en la Cordillera Oriental de Colombia en el Departamento de Norte de Santander',
         ),
         PointOfInterest(
           id: 'p5',
           name: 'Parque Principal',
           latLng: LatLng(8.2381712,-73.3620047),
           description:
-              'Historic palace housing huge art collection, from Roman sculptures to Da Vinci\'s "Mona Lisa."',
+              'Parque de la Tierra de la Cocota y del Voceado. Ocaña esta ubicado a 5 horas de la ciudad de Bucaramanga, en el departamento de Norte de Santander.',
         ),
         PointOfInterest(
           id: 'p6',
           name: 'Museo "Antón García de Bonilla"',
           latLng: LatLng(8.2388228,-73.3583704),
           description:
-              'Iconic, 13th-century cathedral with flying buttresses & gargoyles, setting for Hugo\'s novel.',
+              'El Museo Antón García de Bonilla es un museo ubicado en Ocaña, Colombia. El museo contiene objetos históricos de la ciudad y de la antigua provincia de Ocaña',
         ),
       ],
     ),
@@ -115,36 +115,36 @@ class Destination {
       latLng: LatLng(7.5994321,-72.623674),
       description: 'Chinácota es un municipio que está ubicado a 40 minutos de la Ciudad de Cúcuta de la carretera que conduce a Pamplona, posee un excelente clima de 24°, una altitud promedio de 1.250 msnm, cuenta con una población de más de 15 mil habitantes, de fácil acceso recorriendo 11 km de carretera en buen estado.',
       imageUrl:
-          'https://images.unsplash.com/photo-1513407030348-c983a97b98d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80',
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYz16EEte2eT18ISuqegGfy7Ij225T1JlOAm_Wv_ovOQ&s',
       additionalImages: [
-        'https://images.unsplash.com/photo-1544885935-98dd03b09034?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80',
-        'https://images.unsplash.com/photo-1544885935-98dd03b09034?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80',
-        'https://images.unsplash.com/photo-1544885935-98dd03b09034?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80',
-        'https://images.unsplash.com/photo-1544885935-98dd03b09034?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80',
+        'https://www.esariri.com/wp-content/uploads/2022/09/TOUR-CHINACOTA-3.jpg',
+        'https://cloudfront-us-east-1.images.arcpublishing.com/prisaradioco/JUUVPGTSWVKXTP4S5ESBRE3HXY.jpg',
+        'https://corpomixnds.sfo3.digitaloceanspaces.com/chinacota/12.jpeg',
+        'https://cloudfront-us-east-1.images.arcpublishing.com/prisaradioco/K3RKRBCT35D73LYCJSWCX33ZSY.jpg',
       ],
       rating: 4.9,
       numReviews: 1789,
       pointsOfInterest: [
         PointOfInterest(
           id: 'p7',
-          name: 'Mount Fuji',
-          latLng: LatLng(35.3606, 138.7274),
+          name: 'Entre Flores',
+          latLng: LatLng(7.4940906,-72.5722943),
           description:
-              'Iconic, active stratovolcano known for its symmetrical snow-capped peak & climbing routes.',
+              'GLAMPING 🏕 RESTAURANTE CAMPESTRE espacio mágico creado para vivir tus mejores momentos..Ven y vive',
         ),
         PointOfInterest(
           id: 'p8',
-          name: 'Tokyo Tower',
-          latLng: LatLng(35.6586, 139.7454),
+          name: 'Páramo de Mejué',
+          latLng: LatLng(7.4940906,-72.5722943),
           description:
-              'Prominent steel tower offering observation decks with panoramic city views.',
+              'El Municipio de Chinácota presenta un área de páramo y subpáramo con una extensión de 105,54 Has. Se encuentra ubicada en la parte sur del municipio (en la vereda Iscalá Sur), denominada como Alto de Mejué, que limita con el municipio de Toledo',
         ),
         PointOfInterest(
           id: 'p9',
-          name: 'Senso-ji',
-          latLng: LatLng(35.7148, 139.7967),
+          name: 'Cerro de las 3 cruces',
+          latLng: LatLng(7.5527325,-72.5884821),
           description:
-              'Tokyo\'s oldest temple, offering shopping, dining & a pagoda with views.',
+              'las tres cruces, panorámicas espectaculares,brisa y hace frío',
         ),
       ],
     ),
@@ -154,36 +154,36 @@ class Destination {
       latLng: LatLng(7.614129,-72.6478413),
       description: 'Además de este majestuoso árbol de alrededor de 20 metros de altura, cerca de la plaza principal, está el Templo Parroquial Sagrado Corazón de Jesús. En este Templo de estilo romano, se celebran varias festividades y entre ellas, la patronal al Sagrado Corazón de Jesús y a la señora de la Cueva Santa',
       imageUrl:
-          'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt5RXPHHqxI5Jw7FIF-oJzrBTuIi93tvaPXUEzBH0tCQ&s',
       additionalImages: [
-        'https://images.unsplash.com/photo-1598948485421-33a1655d3c18?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80',
-        'https://images.unsplash.com/photo-1598948485421-33a1655d3c18?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80',
-        'https://images.unsplash.com/photo-1598948485421-33a1655d3c18?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80',
-        'https://images.unsplash.com/photo-1598948485421-33a1655d3c18?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80',
+        'https://www.esariri.com/wp-content/uploads/2022/09/Termales-del-Raizon-Municipio-de-Bochalema-Norte-de-Santander-2.jpg',
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRecetGqkMQ28jxXsEyX-4Es-rSvGXMDvEr5AVMai3QHw&s',
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTPais63j58eiRTsrzQ-uSylox2n_6RKJMYG4imaBMzA&s',
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu5C8jBGsau8nw73UZulqHrmDoLyKSmcS_ao0JuQ-STg&s',
       ],
       rating: 4.6,
       numReviews: 1890,
       pointsOfInterest: [
         PointOfInterest(
           id: 'p10',
-          name: 'Bochalema Main Park',
-          latLng: LatLng(7.6126974,-72.6476575),
+          name: 'Termales Raizon Bochalema',
+          latLng: LatLng(7.6526193,-72.6158627),
           description:
-              'Iconic Sydney opera house with a distinctive sail-like design.',
+              'Las aguas termales Bochalema en Norte Santander, se encuentran a 45 minutos de Cúcuta.',
         ),
         PointOfInterest(
           id: 'p11',
           name: 'Parque',
           latLng: LatLng(7.6109474,-72.6479528),
           description:
-              'Large steel arch bridge known for panoramic views of the city skyline.',
+              'Ubicado en el parque principal del pueblo, este árbol es visitado por los turistas, quienes se sienten atraídos por su particular forma y tamaño ',
         ),
         PointOfInterest(
           id: 'p12',
           name: 'Sendero ecológico AguaBlanca',
           latLng: LatLng(7.609215,-72.6506394),
           description:
-              'Well-known beach attracting surfers to its large, curling waves, and hipsters to its organic eateries.',
+              'Es un sendero ecológico grande, es importante que lleven ropa que cubra de los mosquitos y repelente, además, es bueno que lleven ropa para bañarse',
         ),
       ],
     ),
@@ -193,36 +193,75 @@ class Destination {
       latLng: LatLng(7.8510555,-72.51113),
       description: 'Localizado a 7 km de la capital del departamento con una temperatura media de 26 °C.Este municipio presenta uno de los legados históricos mas importantes de Colombia: Las ruinas del Templo del Congreso de 1821, La Casa Natal del General Santander, Las ruinas de la Capilla Santa Ana, La Casa La Bagatela, y el Tamarindo Histórico, que han sido consagrados monumentos Nacionales, conforman un asombroso complejo histórico.',
       imageUrl:
-          'https://images.unsplash.com/photo-1580060839134-75a5edca2e99?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80',
+          'https://cloudfront-us-east-1.images.arcpublishing.com/prisaradioco/US5ANAHGOVMSTGSJ4T6AK2SABE.jpg',
       additionalImages: [
-        'https://images.unsplash.com/photo-1576485290814-1c72aa4bbb8e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
-        'https://images.unsplash.com/photo-1576485290814-1c72aa4bbb8e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
-        'https://images.unsplash.com/photo-1576485290814-1c72aa4bbb8e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
-        'https://images.unsplash.com/photo-1576485290814-1c72aa4bbb8e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
+        'https://images.mnstatic.com/00/c2/00c2dcaaa57cb29d65c945c64b75a76c.jpg',
+        'https://upload.wikimedia.org/wikipedia/commons/f/f5/Basilica_Menor_Nuestra_Sra_del_Rosario.jpg',
+        'https://media.viajando.travel/p/c385ace5c3c094ce0fd514f8b4b156cc/adjuntos/236/imagenes/000/680/0000680781/1200x675/smart/villa-del-rosario1jpeg.jpeg',
+        'https://www.laopinion.co/sites/default/files/2022-10/PIEDRA%20ROSARIO%20%285%29%201.jpg',
       ],
       rating: 4.8,
       numReviews: 1523,
       pointsOfInterest: [
         PointOfInterest(
           id: 'p13',
-          name: 'Historic church of Villa del Rosario',
+          name: 'Templo Histórico Villa del Rosario',
           latLng: LatLng(7.8380383,-72.4842634),
           description:
-              'Flat-topped mountain forming a prominent landmark overlooking the city of Cape Town.',
+              'es un sitio histórico donde se redactó y firmó la primera constitución de Colombia. Está ubicado en la ciudad de Villa del Rosario en el área metropolitana de Cúcuta, y muy cerca de la frontera con Venezuela.',
         ),
         PointOfInterest(
           id: 'p14',
           name: 'Casa Natal del General Santander',
           latLng: LatLng(7.8341063,-72.4699721),
           description:
-              'Iconic island prison where Nelson Mandela was held, with tours led by ex-prisoners.',
+              'La Casa Natal del General Santander es la casa natal del General colombiano Francisco de Paula Santander, y es donde vivió hasta los 13 años. ',
         ),
         PointOfInterest(
           id: 'p15',
           name: 'Palmas Golf',
           latLng: LatLng(7.8427282,-72.4710749),
           description:
-              'Scenic headland marking the southeastern corner of the Cape Peninsula.',
+              'En Palma Golf podrás aprender y practicar el mejor deporte del mundo ⛳, en un ambiente seguro y familiar 💫 con todos los protocolos de bioseguridad necesarios',
+        ),
+      ],
+    ),
+     Destination(
+      id: '6',
+      name: 'salazar de las palmas',
+      latLng: LatLng(7.7727966, -72.8143143),
+      description: 'Localizado a 7 km de la capital del departamento con una temperatura media de 26 °C.Este municipio presenta uno de los legados históricos mas importantes de Colombia: Las ruinas del Templo del Congreso de 1821, La Casa Natal del General Santander, Las ruinas de la Capilla Santa Ana, La Casa La Bagatela, y el Tamarindo Histórico, que han sido consagrados monumentos Nacionales, conforman un asombroso complejo histórico.',
+      imageUrl:
+          'https://cloudfront-us-east-1.images.arcpublishing.com/semana/3QVZNJMKGFGS5OILY5ONYH2QBY.jpg',
+      additionalImages: [
+        'https://upload.wikimedia.org/wikipedia/commons/4/47/Salazar_de_las_Palmas_NdeS.jpeg',
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmqoLbHX-OjpPcWwmHsV4VbgrUz2AygayyBCy_MclTtA&s',
+        'https://visitcucuta.com/wp-content/uploads/2022/06/IMAGENES-SALAZAR-DE-LAS-PALMAS-NORTE-DE-SANTANDER-DERECHOS-DE-AUTOR-FABIAN-ROMERO-COLOMBIA',
+        'https://salazarcunadelcafe.wordpress.com/wp-content/uploads/2019/04/las-pailas.jpg?w=768',
+      ],
+      rating: 4.8,
+      numReviews: 1523,
+      pointsOfInterest: [
+        PointOfInterest(
+          id: 'p13',
+          name: 'Cañon de Las Pailas ',
+          latLng: LatLng(5.0858855,-81.790196),
+          description:
+              's un Pasaje profundo, estrecho y rocoso formado por un largo tiempo de erosión. Este se encuentra a aproximadamente 30 minutos del monumento de la Virgen (Ver Mapa Abajo) o del Sector conocido como la Purísima',
+        ),
+        PointOfInterest(
+          id: 'p14',
+          name: 'Los Siete Chorros',
+          latLng: LatLng(7.7703736,-72.8269734),
+          description:
+              'En un tibio paraje, el agua helada refresca a los caminantes que se atreven a pasar bajo las siete regaderas.',
+        ),
+        PointOfInterest(
+          id: 'p15',
+          name: 'Parque Principal salazar',
+          latLng: LatLng(7.7732356,-72.8130289),
+          description:
+              'El parque principal de Salazar de las Palmas está poblado por 85 palmas de diferentes tamaños.',
         ),
       ],
     ),

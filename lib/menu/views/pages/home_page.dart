@@ -148,7 +148,7 @@ void navigateToRoute(BuildContext context, int index) {
     const SizedBox(height: 10), // Agrega un espacio entre el saludo y el ID del usuario
     Text(
       userId != null ? ' $userId' : 'Usuario no autenticado',
-      style: TextStyle(fontSize: 16, color: Colors.grey),
+      style: const TextStyle(fontSize: 16, color: Colors.grey),
     ),
   ],
 ),

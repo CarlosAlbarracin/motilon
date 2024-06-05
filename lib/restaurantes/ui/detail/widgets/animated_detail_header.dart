@@ -2,6 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:motilon/restaurantes/models/place.dart';
+import 'package:motilon/restaurantes/ui/widgets/gradient_status_tag.dart';
+import 'package:motilon/restaurantes/ui/widgets/translate_animation.dart';
 import 'package:motilon/sites/extensions/text_theme_x.dart';
 import 'package:motilon/sites/models/place.dart';
 import 'package:motilon/sites/ui/detail/widgets/place_images_page_view.dart';
@@ -9,15 +12,15 @@ import 'package:motilon/sites/ui/widgets/gradient_status_tag.dart';
 import 'package:motilon/sites/ui/widgets/translate_animation.dart';
 
 
-class AnimatedDetailHeader extends StatelessWidget {
-  const AnimatedDetailHeader({
+class AnimatedDetailHeaderR extends StatelessWidget {
+  const AnimatedDetailHeaderR({
     super.key,
     required this.place,
     required this.topPercent,
     required this.bottomPercent,
   });
 
-  final TravelPlace place;
+  final RestaurantPlace place;
   final double topPercent;
   final double bottomPercent;
 
@@ -89,7 +92,7 @@ class AnimatedDetailHeader extends StatelessWidget {
                       opacity: bottomPercent < 1 ? 0 : 1,
                       child: Opacity(
                         opacity: topPercent,
-                        child: GradientStatusTag(
+                        child: GradientStatusTagR(
                           statusTag: place.statusTag,
                         ),
                       ),
@@ -107,7 +110,7 @@ class AnimatedDetailHeader extends StatelessWidget {
         ),
         Positioned.fill(
           top: null,
-          child: TranslateAnimation(
+          child: TranslateAnimationR(
             child: _UserInfoContainer(place: place),
           ),
         )
@@ -123,12 +126,12 @@ class _UserInfoContainer extends StatelessWidget {
     required this.place,
   });
 
-  final TravelPlace place;
+  final RestaurantPlace place;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80,
+      height: 70,
       padding: const EdgeInsets.symmetric(horizontal: 20),
       decoration: const BoxDecoration(
         color: Colors.white,

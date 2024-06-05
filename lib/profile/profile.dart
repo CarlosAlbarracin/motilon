@@ -6,6 +6,28 @@ import 'package:image_picker/image_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+class UserData {
+  final String name;
+  final String email;
+  final String password;
+  final String? profileImage; // Nuevo campo para almacenar la URL de la imagen de perfil
+
+  UserData({
+    required this.name,
+    required this.email,
+    required this.password,
+    this.profileImage,
+  });
+
+  factory UserData.fromMap(Map<String, dynamic>? map) {
+    return UserData(
+      name: map?['name'] ?? '',
+      email: map?['email'] ?? '',
+      password: map?['password'] ?? '',
+      profileImage: map?['profileImage'], // Asigna el valor de 'profileImage' si existe en el mapa
+    );
+  }
+}
 class Perfil extends StatefulWidget {
   const Perfil({Key? key}) : super(key: key);
 
@@ -61,12 +83,11 @@ bool _isSelectingImage = false;
     });
   }
 }
-  void _updateProfile() async {
+void _updateProfile() async {
   final user = FirebaseAuth.instance.currentUser;
   if (user != null) {
     try {
       if (_userData == null) {
-        // Si los datos del usuario no se han cargado correctamente, mostrar un mensaje de error
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Error: No se pudieron cargar los datos del usuario.')));
         return;
       }
@@ -77,24 +98,25 @@ bool _isSelectingImage = false;
         'password': _passwordController.text.trim(),
       };
 
-        if (_profileImage != null) {
-          final storageRef = FirebaseStorage.instance.ref().child('profile_images').child(user.uid);
-          final uploadTask = storageRef.putFile(_profileImage!);
-          final snapshot = await uploadTask.whenComplete(() => null);
-          final downloadURL = await snapshot.ref.getDownloadURL();
+      if (_profileImage != null) {
+        final storageRef = FirebaseStorage.instance.ref().child('profileImage').child(user.uid);
+        final uploadTask = storageRef.putFile(_profileImage!);
+        final snapshot = await uploadTask.whenComplete(() => null);
+        final downloadURL = await snapshot.ref.getDownloadURL();
 
-          profileData['profileImage'] = downloadURL;
-        }
-
-        await FirebaseFirestore.instance.collection('users').doc(user.uid).update(profileData);
-
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Perfil Actualizado.')));
-      } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Fallo en conexión.')));
-        print(e);
+        profileData['profileImage'] = downloadURL;
       }
-    }
+
+      await FirebaseFirestore.instance.collection('users').doc(user.uid).update(profileData);
+
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Perfil Actualizado.')));
+    } catch (e) {
+  print('Error al actualizar el perfil: $e');
+  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Fallo en conexión.')));
+}
   }
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -166,25 +188,3 @@ bool _isSelectingImage = false;
   }
 }
 
-class UserData {
-  final String name;
-  final String email;
-  final String password;
-  final String? profileImage;
-
-  UserData({
-    required this.name,
-    required this.email,
-    required this.password,
-    this.profileImage,
-  });
-
-  factory UserData.fromMap(Map<String, dynamic>? map) {
-    return UserData(
-      name: map?['name'] ?? '',
-      email: map?['email'] ?? '',
-      password: map?['password'] ?? '',
-      profileImage: map?['profileImage'],
-    );
-  }
-}

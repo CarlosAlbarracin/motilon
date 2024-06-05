@@ -1,8 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 
 import 'package:motilon/mapa/animated_market_map.dart';
 import 'package:motilon/prinpical/main.dart';
+import 'package:motilon/prinpical/screens/favorite_screen.dart';
 
 
 //import 'package:motilon/agencia/agencia/explore.dart';
@@ -10,29 +13,59 @@ import 'package:motilon/prinpical/main.dart';
 
 //import 'package:motilon/map/animated_market_map.dart';
 import 'package:motilon/profile/profile.dart';
+import 'package:motilon/restaurantes/travel_app.dart';
 import 'package:motilon/restaurants/view/home.dart';
 import 'package:motilon/sites/travel_app.dart';
 
-import '../menu/views/pages/favorite_class.dart';
+
 import '../sites/ui/feed/widgets/favorite.dart';
 
 
 //import 'package:motilon/restaurants/view/home.dart';
 //import 'package:motilon/sites/travel_app.dart';
 
-class NavBar extends StatelessWidget {
+class NavBar extends StatefulWidget {
   
   const NavBar({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  State<NavBar> createState() => _NavBarState();
+}
 
-       UserData userData = UserData(
-      name: 'Carlos Albarracin',
-      email: 'albarracincarlos58@gmail.com',
-      password: 'password123',
-      profileImage: 'https://example.com/profile_image.jpg',
-    );
+class _NavBarState extends State<NavBar> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  String? userId;
+  @override
+  void initState() {
+    super.initState();
+    _getCurrentUserId();
+  }
+
+ void _getCurrentUserId() async {
+  User? user = _auth.currentUser;
+  if (user != null) {
+    // Obtener el ID del usuario actual
+    userId = user.uid;
+
+    // Obtener el nombre de usuario desde Firestore
+    DocumentSnapshot snapshot =
+        await FirebaseFirestore.instance.collection('users').doc(userId).get();
+    if (snapshot.exists) {
+      // Especifica el tipo de datos devuelto por snapshot.data() como Map<String, dynamic>
+      Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+
+      setState(() {
+        // Accede al nombre de usuario usando la clave 'name'
+        userId = data['email'];
+      });
+    }
+  }
+}
+  @override
+  Widget build(BuildContext context) {
+ 
+  
+   
     return Drawer(
       
       child: ListView(
@@ -42,7 +75,8 @@ class NavBar extends StatelessWidget {
         children: [
           UserAccountsDrawerHeader(
             accountName: const Text('Carlos Albarracin '),
-            accountEmail: const Text('albarracincarlos58@gmail.com'),
+            accountEmail:  Text(  userId != null ? ' $userId' : 'Usuario no autenticado',
+      style: TextStyle(fontSize: 16, color: Colors.grey),),
             currentAccountPicture: CircleAvatar(
               child: ClipOval(
                 child: Image.network(
@@ -86,7 +120,7 @@ class NavBar extends StatelessWidget {
             title: const Text('Restaurantes'),
             onTap: (){
                Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) =>  const  HomePageRestaurant(),
+                        builder: (context) =>  const Restaurante(),
                       ));
             } 
           ),
@@ -104,7 +138,7 @@ class NavBar extends StatelessWidget {
             title: const Text('Favoritos'),
             onTap: (){
                Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) =>  FavoritePlacesScreen(),
+                        builder: (context) =>  FavoritesScreen(),
                       ));
             } 
           ),

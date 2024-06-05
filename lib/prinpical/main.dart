@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:motilon/prinpical/models/rutas.dart';
+import 'package:motilon/prinpical/screens/placesT_screen.dart';
 import 'package:motilon/prinpical/screens/routes_screen.dart';
 import 'package:motilon/routes_tour/model.dart';
 
@@ -32,6 +33,7 @@ class Menu extends StatelessWidget {
         '/points-of-interest': (context) => const PointsOfInterestScreen(),
         '/map': (context) => const MapScreen(),
         '/routes': (context) => const ScreenVideo(),
+        '/lugares': (context) => const PlacesTScreen(),
       },
     );
   }

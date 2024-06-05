@@ -8,6 +8,7 @@ import 'package:motilon/common/theme_helper.dart';
 import 'package:motilon/login/services/firebase_auth_service.dart';
 import 'package:motilon/login/widgets/customized_textfield.dart';
 import 'package:motilon/menu/views/pages/home_page.dart';
+import 'package:motilon/prinpical/main.dart';
 
 
 
@@ -64,13 +65,13 @@ class _LoginPageState extends State<LoginPage>{
                           children: [
                             CustomizedTextfield(
                                             myController: emailController,
-                                            hintText: "Username",
+                                            hintText: "Correo",
                                             isPassword: false,
                                           ),
                             const SizedBox(height: 8.0),
                             CustomizedTextfield(
                                             myController: passwordController,
-                                            hintText: "Password",
+                                            hintText: "Contraseña",
                                             isPassword: true,
                                           ),
                             const SizedBox(height: 15.0),
@@ -103,7 +104,7 @@ class _LoginPageState extends State<LoginPage>{
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>  const HomePage()));
+                              builder: (context) =>  const Menu()));
                     }
 
                     //  This code is gone inside the catch block

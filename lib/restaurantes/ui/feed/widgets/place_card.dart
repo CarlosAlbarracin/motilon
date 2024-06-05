@@ -1,28 +1,29 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:motilon/menu/theme.dart';
-import 'package:motilon/sites/extensions/text_theme_x.dart';
-import 'package:motilon/sites/models/place.dart';
-import 'package:motilon/sites/ui/widgets/gradient_status_tag.dart';
+
+import 'package:motilon/restaurantes/models/place.dart';
+import 'package:motilon/restaurantes/extensions/text_theme_x.dart';
+
+import 'package:motilon/restaurantes/ui/widgets/gradient_status_tag.dart';
 
 
-class PlaceCard extends StatelessWidget {
-  const PlaceCard({
+class PlaceCardR extends StatelessWidget {
+  const PlaceCardR({
     Key? key,
-    required this.place,
+    required this.placeR,
     required this.onPressed,
   }) : super(key: key);
 
-  final TravelPlace place;
+  final RestaurantPlace placeR;
   final VoidCallback onPressed;
 
   BoxDecoration get _cardDecoration {
     return BoxDecoration(
       borderRadius: BorderRadius.circular(12),
       image: DecorationImage(
-        image: CachedNetworkImageProvider(place.imagesUrl.first),
+        image: CachedNetworkImageProvider(placeR.imagesUrl.first),
        
         fit: BoxFit.cover,
         colorFilter: const ColorFilter.mode(
@@ -35,7 +36,7 @@ class PlaceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final statusTag = place.statusTag;
+    final statusTag = placeR.statusTag;
     return InkWell(
       onTap: onPressed,
       child: Container(
@@ -46,12 +47,12 @@ class PlaceCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Spacer(),
-            Text(place.name, style: context.headline2),
+            Text(placeR.name, style: context.headline2),
             const SizedBox(height: 10),
-            GradientStatusTag(statusTag: statusTag),
+            GradientStatusTagR(statusTag: statusTag),
             const Spacer(),
             Text(
-             place.locationDesc,
+             placeR.locationDesc,
       style: TextStyle(
         color: Colors.white, // Cambia el color del texto a blanco
         fontSize: Theme.of(context).textTheme.headline6?.fontSize, // Usa el tamaño de fuente de headline6

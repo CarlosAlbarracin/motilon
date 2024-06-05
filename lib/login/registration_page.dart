@@ -106,6 +106,8 @@ class _RegistrationPageState extends State<RegistrationPage>{
     // Guardar el nombre de usuario en Firestore
     await FirebaseFirestore.instance.collection('users').doc(userId).set({
       'name': _usernameController.text.trim(),
+      'email': _emailController.text.trim(),
+      'password': _passwordController.text.trim(),
       // Otros datos del usuario si los tienes
     });
 

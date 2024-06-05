@@ -1,16 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:latlong2/latlong.dart';
 class TravelPlace {
   TravelPlace({
     required this.name,
     required this.subtitle,
-    required this.user,
     required this.imagesUrl,
     this.id = '',
     this.description = '',
     this.locationDesc = '',
+    required this.latLng, 
     this.statusTag = StatusTag.popular,
     
     this.isFavorite = false,
+    required this.items,
 
    
   });
@@ -18,28 +20,30 @@ class TravelPlace {
   final String id;
   final String name;
   final String subtitle;
-  final TravelUser user;
+  final LatLng latLng;
   final StatusTag statusTag;
   
   bool isFavorite; 
   final String locationDesc;
   final String description;
   final List<String> imagesUrl;
+  final String items;
    static List<TravelPlace> getFavoritePlaces(List<TravelPlace> places) {
     return places.where((place) => place.isFavorite).toList();
   }
-  factory TravelPlace.fromFirestore(DocumentSnapshot doc) {
-    Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+ factory TravelPlace.fromFirestore(DocumentSnapshot snapshot) {
+    var data = snapshot.data() as Map<String, dynamic>;
+
     return TravelPlace(
-      id: doc.id,
-      name: data['name'] ?? '',
-      subtitle: data['subtitle'] ?? '',
-      user: data['user'] ?? TravelUser.users, // Aquí debes tener una forma de convertir los datos del usuario en un objeto TravelUser
+      id: data['id'].toString(),
+      name: data['name'].toString(),
+      subtitle: data['subtitle'].toString(),
+      description: data['description'].toString(),
+      items: data['items'].toString(),
+      latLng: data['latLng'],
       imagesUrl: List<String>.from(data['imagesUrl'] ?? []),
-      description: data['description'] ?? '',
-      locationDesc: data['locationDesc'] ?? '',
-      statusTag: StatusTag.popular, // Puedes establecer un valor predeterminado o leerlo del document: d'] ?? 0,
-      isFavorite: data['isFavorite'] ?? false,
+      locationDesc: data['locationDesc'].toString(),
+      isFavorite: data['isFavorite'] ?? false, 
     );
   }
 
@@ -47,192 +51,147 @@ class TravelPlace {
     
     TravelPlace(
       id: '1',
-      name: 'Chinacota',
-      subtitle: 'Chinacota',
+      name: 'Hotel Casino',
+      subtitle: 'Cucuta',
       isFavorite: false,
       description:
-          'Chinacota tierra merecedora de ser considerada "La Casa de Todos" gracias a la belleza de sus paisajes,'
-          'donde la naturaleza se conjuga en esencial armonia con los paraisos de descanso y recreacion que posee. Al ingresar al municipio se puede observar como este es un inmenso jardin, '
-          'repleto de multiples colores que dan vida y hermosura a cada lugar',
+         'El hotel Casino Internacional se encuentra en Cúcuta, justo frente al centro comercial Ventura. '
+          'Ofrece una piscina al aire libre, sauna, gimnasio, conexión Wi-Fi gratuita y un cóctel de bienvenida. '
+         
+          'Las habitaciones del Hotel Casino Internacional presentan una decoración elegante e incluyen aire acondicionado',
       imagesUrl: [
-        'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/e3/1e/21/hotel-y-centro-de-convenciones.jpg?w=500&h=300&s=1',
-        'https://visitcucuta.com/wp-content/uploads/2020/11/TOUR-CHINACOTA-3.jpg',
-        'https://turismoi.co/uploads/co/photo/photo_file/14491/IMG_20201015_154518.jpg'
+        'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/25/1a/1d/56/hotel-casino-internacional.jpg?w=700&h=-1&s=1',
+        'https://cf.bstatic.com/xdata/images/hotel/max1024x768/423481157.jpg?k=bc347d4e03075a7667d3c0cf00adcfc09ce87fc97827298569e0fd982e4ca64c&o=&hp=1',
+        'https://content.r9cdn.net/rimg/kimg/b3/6e/216dcdaf-5acdc0d0-0.jpg?width=440&height=220&crop=false'
       ],
-      user: TravelUser.alex,
-      locationDesc: 'Chinacota, Norte de Santander',
+      items:'-wifi - tv plana' ' - Aire Acondicionado'
+      ' - Baño privado',
+      locationDesc: 'Cucuta, Norte de Santander',
+      latLng: LatLng(7.887133,-72.4981937),
     ),
     TravelPlace(
       id: '2',
-      name: 'Pamplona',
-      subtitle: 'Pamplona',
+      name: 'Hotel Villa nico',
+      subtitle: 'Bochalema',
       isFavorite: false,
       description:
-          'Pamplona es un municipio ubicado en el departamento de Norte de Santander, Colombia.  '
-          'Es conocido por su arquitectura colonial y su hermoso centro histórico. La ciudad está rodeada de montañas y cuenta con un clima agradable. '
-          ' del mar Caribe.'
-          'Pamplona es reconocida por ser cuna de importantes personajes históricos y culturales, y también es famosa por su tradicional Festival de las Colonias, en el que se celebran las diferentes culturas presentes en la región.',
+          'Villa Nico hospedaje campestre se encuentra en Bochalema, a 42 km de Ecoparque Comfanorte, y ofrece servicio de check-in y check-out exprés '
+          'habitaciones libres de humo, restaurante, wifi gratis en todo el alojamiento y piscina '
+         
+          'al aire libre. Este alojamiento ofrece centro de fitness, jardín y terraza.',
       imagesUrl: [
-        'https://turismonortedesantander.com/wp-content/uploads/Pamplona_norte-de-santander.jpg',
-        'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/f0/c3/ba/cariongo-plaza-hotel.jpg?w=600&h=400&s=1',
-        'https://www.pamplona-nortedesantander.gov.co/MiMunicipio/PublishingImages/Paginas/Sitios-de-Interes-/CASA-AGUEDA-GALLARDO-PAMPLONA.png'
+        'https://cf.bstatic.com/xdata/images/hotel/max1024x768/446287272.jpg?k=f40a49dea1bdaaa4c645faa2a3d5a895cb157ba779720ac59435c61250e6dddd&o=&hp=1',
+        'https://cf.bstatic.com/xdata/images/hotel/max1024x768/483174337.jpg?k=560adf8766e9834bbbfd7e9e0664dc505034db37350dd7645c0a92c2b63a2341&o=&hp=1',
+        'https://cf.bstatic.com/xdata/images/hotel/max1024x768/417024951.jpg?k=7f6287033e098dacffa0f84e0f53eda823073c4450904be2c36a7052cd4c97a9&o=&hp=1'
       ],
       statusTag: StatusTag.event,
-      user: TravelUser.mario,
-      locationDesc: 'Pamplona, Norte de Santander',
+     items:'-wifi''/n - tv plana',
+      locationDesc: 'Bochalema, Norte de Santander',
+      latLng: LatLng(7.3720218, -72.6678032),
     ),
     TravelPlace(
       id: '3',
       isFavorite: false,
-      name: 'ocaña',
-      subtitle: 'Ocaña',
+      name: 'Hotel By hilton',
+      subtitle: 'Cucuta',
       description:
-          ''' Ocaña es un municipio ubicada en el departamento de Norte de Santander, en Colombia. Es reconocida por su riqueza histórica y cultural. En Ocaña se encuentran numerosos monumentos y sitios de interés, como la Catedral Basílica Menor de Nuestra Señora del Carmen, el Templo de Santa Clara y el Museo de la Memoria Histórica. La ciudad también es famosa por sus festividades religiosas y culturales, como la Semana Santa y el Festival Folclórico y Reinado Nacional del Bambuco.''',
+          'Estamos a solo minutos del centro de Cúcuta y de los parques industriales. En Ventura Plaza, a ½ mi/0,8 km al norte, encontrará muchos restaurantes, tiendas y distracciones. También nos encontramos a una distancia corta a pie de una variedad de restaurantes y de la Universidad Simón Bolívar.',
       imagesUrl: [
-        'https://ocanansantander.files.wordpress.com/2011/10/rosangela-castro.jpg',
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Oca%C3%B1a_-_panoramio_%281%29.jpg/600px-Oca%C3%B1a_-_panoramio_%281%29.jpg',
-        'https://radionacional-v3.s3.amazonaws.com/s3fs-public/styles/portadas_relaciona_4_3/public/node/article/field_image/whatsapp_image_2019-11-29_at_3.23.28_pm.jpeg?h=7b436a88&itok=THRV4iyb'
+        'https://cf.bstatic.com/xdata/images/hotel/max1024x768/486129069.jpg?k=5ef5c8736b6c2bf61d37517de4a0f81813416faefd9216360f1ec5a8135acc09&o=&hp=1',
+        'https://www.hilton.com/im/en/CUCCOHX/7997555/-duf6293-v-ok.jpg?impolicy=crop&cw=7102&ch=3976&gravity=NorthWest&xposition=0&yposition=381&rw=768&rh=430',
+        'https://cf.bstatic.com/xdata/images/hotel/max1024x768/486129070.jpg?k=7e8b23218052bc47b4457829bc99c88412620c94b2571c4df881af2cbecb71d2&o=&hp=1'
       ],
       statusTag: StatusTag.event,
-      user: TravelUser.luna,
-      locationDesc: 'Ocaña, Norte de Santander',
+      items:'-wifi''/n - tv plana',
+      locationDesc: 'Cucuta, Norte de Santander',
+      latLng: LatLng(7.3720218, -72.6678032),
     ),
     TravelPlace(
       id: '4',
-      name: 'Cucuta',
-      subtitle: 'Cucuta',
+      name: 'Hotel Hontibon',
+      subtitle: 'Pamplona',
       isFavorite: false,
       description:
-          'Cúcuta es la capital del departamento de Norte de Santander, Colombia. Es una ciudad fronteriza, limitando con Venezuela. Cúcuta es reconocida como un importante centro comercial y de negocios, con una amplia oferta de servicios y actividades económicas.'
-          'La ciudad cuenta con una rica historia, con monumentos y sitios de interés como la Catedral de San José y el Puente Internacional Simón Bolívar.'
-          'Además, es conocida por su festival anual de la Cumbia, una de las danzas más representativas de la región',
+          'Hotel Hontibon es una magnífica elección para los viajeros que visiten Pamplona, ya que ofrece numerosos servicios diseñados para mejorar tu estancia.'
+          'El hotel pequeño tiene servicio de habitaciones y podrás estar conectado durante tu estancia, ya que Hotel Hontibon ofrece wifi gratuito a los huéspedes.'
+          ,
       imagesUrl: [
-        'https://turismonortedesantander.com/wp-content/uploads/Loma-de-Bolivar.jpg',
-        'https://i0.wp.com/visitcucuta.com/wp-content/uploads/2020/03/CERRO-JESUS-NAZARENO-2.jpg?resize=768%2C563&ssl=1',
-        'https://cloudfront-us-east-1.images.arcpublishing.com/semana/M3UIM2P4HZCNVIWQFLTBF5BPLA.jpg'
+        'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/03/9a/99/a8/hotel-hontibon.jpg?w=700&h=-1&s=1',
+        'https://cf.bstatic.com/xdata/images/hotel/max1024x768/424380776.jpg?k=d2b858f7fc6766c30453cd8f499d0a508b7dde99044570e24883df7f07899cdf&o=&hp=1',
+        'https://y.cdrst.com/foto/hotel-sf/d7f10/granderesp/hotel-hontibon-habitacion-f8b4aa4.jpg'
       ],
       statusTag: StatusTag.event,
-      user: TravelUser.lili,
-      locationDesc: 'Cucuta, Norte de Santander',
+      items:'-wifi''- tv plana',
+      locationDesc: 'Pamplona, Norte de Santander',
+      latLng: LatLng(7.3720218, -72.6678032),
     ),
     TravelPlace(
       id: '5',
-      name: 'Cacota',
-      subtitle: 'Cacota',
+      name: 'Hotel Villa',
+      subtitle: 'Villa del Rosario',
       isFavorite: false,
       description:
-          ' Cácota es un municipio situado en el departamento de Norte de Santander, Colombia. Es conocido por su hermoso entorno natural, con paisajes montañosos y una gran diversidad de flora y fauna. '
-          ' El municipio cuenta con varios atractivos turísticos, como el Parque Natural Regional El Tamá y la Laguna de Cácota. '
-          ' Además, en Cácota se celebra la Fiesta de San Pedro, una tradición popular en la que se realizan procesiones y actividades culturales',
+          ' Hotel Villa del Rosario Nuevo está en Melgar, a 7,8 km de Piscilago, y dispone de alojamiento con restaurante, parking privado gratis, bar y salón de uso común '
+          ' El hotel tiene bañera de hidromasaje, recepción 24 horas y wifi gratis en todo el alojamiento. '
+          ' Las unidades de este alojamiento están equipadas con TV de pantalla plana. En el hotel, las habitaciones disponen de aire acondicionado y baño privado.',
       imagesUrl: [
-        'https://vamosllegando.com/wp-content/uploads/2022/07/cacota-norte-de-santander-como-llegar-desde-cucuta-desde-pamplona.jpg',
+        'https://cf.bstatic.com/xdata/images/hotel/max1024x768/326619542.jpg?k=619862f32bdd42c8236023d8f2d768c72bf8e85a43d4274a495094479009be77&o=&hp=1',
         'https://i0.wp.com/tintatic.com/wp-content/uploads/2022/03/20220329_Cacota-parque-principal-e-iglesia_4280-scaled.jpg?fit=1280%2C960&ssl=1',
         'https://visitcucuta.com/wp-content/uploads/2020/01/Tour-Cacota-Norte-de-Santander-turismo-2022-2023-2024-5-e1648091564569.jpg'
       ],
       statusTag: StatusTag.event,
-      user: TravelUser.mario,
-      locationDesc: 'Cacota, Norte de Santander',
+      items:'-wifi''/n - tv plana',
+      locationDesc: 'Villa del Rosario, Norte de Santander',
+      latLng: LatLng(7.3720218, -72.6678032),
     ),
     TravelPlace(
       id: '6',
-      name: 'Bochalema',
-      subtitle: 'Bochalema',
+      name: 'Hotel Victoria Plaza Millenium',
+      subtitle: 'Cucuta',
       isFavorite: false,
       description:
-          'Bochalema es un municipio colombiano ubicado en el departamento de Norte de Santander. Es reconocido por su producción agrícola, especialmente de caña de azúcar y productos derivados. '
-          ' Bochalema cuenta con hermosos paisajes rurales, con extensas plantaciones y montañas. '
-          'El municipio también es famoso por su festival anual de la Caña de Azúcar, en el que se realizan desfiles, muestras gastronómicas y actividades culturales.',
+          'Hotel Victoria Plaza Millenium se encuentra en Cúcuta, a menos de 1 km de Biblioteca Pública de Cucuta, y ofrece alojamiento con restaurante, parking privado gratis, piscina al aire libre y jardín.'
+          'El alojamiento dispone de recepción 24 horas, servicio de traslado, servicio de habitaciones y wifi gratis.'
+          'En el hotel, cada habitación tiene escritorio. Todas las unidades del alojamiento tienen baño privado con ducha y artículos de aseo gratuitos, además de TV de pantalla plana y aire acondicionado. ',
       imagesUrl: [
-        'https://visitcucuta.com/wp-content/uploads/2020/03/DESTINO-TURISTICO-BOCHALEMA-5.jpg',
-        'https://cloudfront-us-east-1.images.arcpublishing.com/prisaradioco/KJJ33Z72KNKHXBTYFO53HEN3PM.jpg',
-        'https://colombiaextraordinaria.com/somos_colombia/external/img/img_departamentos/Bochalemaimagen_ce.jpg'
+        'https://cf.bstatic.com/xdata/images/hotel/max500/490607394.jpg?k=9566ecdf8cc44217ac49571ea13e006331e5262150f047bd5ca45af2a82d360b&o=&hp=1',
+        'https://images.trvl-media.com/lodging/42000000/41920000/41915100/41915043/28524655.jpg?impolicy=resizecrop&rw=575&rh=575&ra=fill',
+        'https://cf.bstatic.com/xdata/images/hotel/max1024x768/332524913.jpg?k=164d7e27ea19fb9b066f088b6dfcb024f8e2d8a41eef93a968ae13191facb415&o=&hp=1'
       ],
       statusTag: StatusTag.event,
-      user: TravelUser.mario,
-      locationDesc: 'Bochalema, Norte de Santander',
+      items:'-wifi''/n - tv plana',
+      locationDesc: 'Cucuta, Norte de Santander',
+      latLng: LatLng(7.3720218, -72.6678032),
     ),
     TravelPlace(
       id: '7',
-      name: 'Villa del Rosario',
-      subtitle: 'Villa del Rosario',
+      name: 'Hotel Arizona ',
+      subtitle: 'Cucuta',
       isFavorite: false,
       description:
-          'Villa del Rosario es una localidad situada en el departamento de Norte de Santander, Colombia. Es reconocida por su importancia histórica como cuna de la independencia de Colombia.'
-          'En este municipio se encuentra el Santuario de Nuestra Señora de la Laja, un importante lugar de peregrinación. Villa del Rosario cuenta también con un hermoso centro histórico, con calles empedradas y casas coloniales. '
-          ' Además, es conocida por sus festividades religiosas y tradiciones culturales.',
+          'Hotel Arizona Suites, es un referente obligado de la hotelería de excelencia en la ciudad de Cúcuta. 70 bellas, funcionales y amplias habitaciones y suites, todas con vista'
+          'Su especial arquitectura da frescura a los espacios que permiten disfrutar del clima cálido de la ciudad, conformando así un entorno en el que la piscina y las zonas húmedas ocupan un lugar central para la diversión'
+          '',
       imagesUrl: [
-        'https://turismonortedesantander.com/wp-content/uploads/Templo_Historico_Cucuta.jpg',
-        'https://cdn.municipios.com.co/fotos/849-2017-09-15-20-59-636-L.jpg',
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIEVn2NbQs867Z069m608Qow_2ytIhJdlfng&usqp=CAU'
+        'https://cf.bstatic.com/xdata/images/hotel/max1024x768/95382644.jpg?k=222007e6f4ad3325849adf12315fa680fdc62c353b5212eb239610c36854aedc&o=&hp=1',
+        'https://hotelarizonasuites.com/wp-content/uploads/2017/04/slide-piscina.jpg',
+        'https://x.cdrst.com/foto/hotel-sf/74faa/granderesp/hotel-arizona-suites-cucuta-servicios-11f3a7c4.jpg'
       ],
       statusTag: StatusTag.event,
-      user: TravelUser.mario,
-      locationDesc: 'villa del Rosario, Norte de Santander',
+      items:'-wifi''/n - tv plana',
+      locationDesc: 'Cucuta, Norte de Santander',
+      latLng: LatLng(7.3720218, -72.6678032),
     ),
-    TravelPlace(
-      id: '8',
-      name: 'Salazar',
-      subtitle: 'salazar',
-      isFavorite: false,
-      description:
-          'Salazar es un municipio situado en el departamento de Norte de Santander, Colombia. Es conocido por su producción agrícola, en particular de café y productos lácteos.'
-          'Salazar cuenta con un hermoso entorno natural, con montañas y ríos. Además, en el municipio se celebran festividades como la Feria Agropecuaria y Artesanal de Salazar y la Fiesta de la Empanada.'
-          ,
-      imagesUrl: [
-        'https://visitcucuta.com/wp-content/uploads/2022/06/IMAGENES-SALAZAR-DE-LAS-PALMAS-NORTE-DE-SANTANDER-DERECHOS-DE-AUTOR-FABIAN-ROMERO-COLOMBIA-13-820x615.jpg.webp',
-        'https://i0.wp.com/visitcucuta.com/wp-content/uploads/2022/06/IMAGENES-SALAZAR-DE-LAS-PALMAS-NORTE-DE-SANTANDER-DERECHOS-DE-AUTOR-FABIAN-ROMERO-COLOMBIA-11.jpg?resize=820%2C615&ssl=1',
-        'https://www.pamplona-nortedesantander.gov.co/MiMunicipio/PublishingImages/Paginas/Sitios-de-Interes-/CASA-AGUEDA-GALLARDO-PAMPLONA.png'
-      ],
-      statusTag: StatusTag.event,
-      user: TravelUser.mario,
-      locationDesc: 'Salazar, Norte de Santander',
-    ),
-    TravelPlace(
-      id: '9',
-      name: 'Durania',
-      subtitle: 'Durania',
-      isFavorite: false,
-      description:
-          'Durania es un municipio colombiano ubicado en el departamento de Norte de Santander. Se caracteriza por su belleza natural, con paisajes montañosos y una gran diversidad de flora y fauna. '
-          'El municipio cuenta con varias cascadas y ríos, ideales para realizar actividades al aire libre como senderismo y ecoturismo. '
-          'Durania también es reconocida por su producción de café y su festival anual del Café y la Guadua.',
-      imagesUrl: [
-        'https://turismonortedesantander.com/wp-content/uploads/Leon_estatua_durania.jpg',
-        'https://turismonortedesantander.com/wp-content/uploads/Durania_norte-de-santander.jpg',
-        'https://turismonortedesantander.com/wp-content/uploads/Piscina_Durania_norte-de-santander.jpg'
-      ],
-      statusTag: StatusTag.event,
-      user: TravelUser.mario,
-      locationDesc: 'Durania, Norte de Santander',
-    ),
-    TravelPlace(
-      id: '10',
-      name: 'Labateca',
-      subtitle: 'Labateca',
-      isFavorite: false,
-      description:
-          'Labateca es un municipio colombiano ubicado en el departamento de Norte de Santander. Es reconocido por su belleza natural y su clima agradable.'
-          'El municipio cuenta con paisajes montañosos y áreas protegidas, como el Parque Nacional Natural Tamá.'
-          'Labateca también es conocida por su producción agrícola, en especial de café.',
-      imagesUrl: [
-        'https://visitcucuta.com/wp-content/uploads/2020/01/Cascada-de-Lirgua-1-820x615.jpg.webp',
-        'https://visitcucuta.com/wp-content/uploads/2020/01/Municipio-de-Labateca-4-820x615.jpg.webp',
-        'https://www.viajarenverano.com/wp-content/uploads/2019/02/Labateca-Plaza.jpg'
-      ],
-      
-      statusTag: StatusTag.event,
-      user: TravelUser.mario,
-      locationDesc: 'Labateca, Norte de Santander',
-    ),
+    
   ];
-  static final collectionPlaces = [
+  /*static final collectionPlaces = [
     TravelPlace(
       name: 'San Miguel de Allende',
       subtitle: 'Chinacota',
       imagesUrl: [
         'https://www.viajarenverano.com/wp-content/uploads/2019/02/Labateca-Plaza.jpg'
       ],
-      user: TravelUser.mario,
+      items:'-wifi''/n - tv plana',
     ),
     TravelPlace(
       name: 'Chichen Itza',
@@ -240,7 +199,7 @@ class TravelPlace {
       imagesUrl: [
         'https://turismonortedesantander.com/wp-content/uploads/Piscina_Durania_norte-de-santander.jpg'
       ],
-      user: TravelUser.mario,
+      items:'-wifi''/n - tv plana',
     ),
     TravelPlace(
       name: 'Ciudad de Mexico',
@@ -248,7 +207,7 @@ class TravelPlace {
       imagesUrl: [
         'https://www.pamplona-nortedesantander.gov.co/MiMunicipio/PublishingImages/Paginas/Sitios-de-Interes-/CASA-AGUEDA-GALLARDO-PAMPLONA.png'
       ],
-      user: TravelUser.mario,
+      items:'-wifi''/n - tv plana',
     ),
     TravelPlace(
       name: 'Teotihuacan',
@@ -256,7 +215,7 @@ class TravelPlace {
       imagesUrl: [
         'https://i0.wp.com/visitcucuta.com/wp-content/uploads/2022/06/IMAGENES-SALAZAR-DE-LAS-PALMAS-NORTE-DE-SANTANDER-DERECHOS-DE-AUTOR-FABIAN-ROMERO-COLOMBIA-11.jpg?resize=820%2C615&ssl=1'
       ],
-      user: TravelUser.mario,
+      items:'-wifi''/n - tv plana',
     ),
     TravelPlace(
       name: 'Taxco',
@@ -264,7 +223,7 @@ class TravelPlace {
       imagesUrl: [
         'https://images.unsplash.com/photo-1595781514079-2abd0a36f892?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=60'
       ],
-      user: TravelUser.mario,
+      items:'-wifi''/n - tv plana',
     ),
     TravelPlace(
       name: 'Acapulco',
@@ -272,9 +231,9 @@ class TravelPlace {
       imagesUrl: [
         'https://radionacional-v3.s3.amazonaws.com/s3fs-public/styles/portadas_relaciona_4_3/public/node/article/field_image/whatsapp_image_2019-11-29_at_3.23.28_pm.jpeg?h=7b436a88&itok=THRV4iyb'
       ],
-      user: TravelUser.luna,
+     items:'-wifi''/n - tv plana',
     ),
-  ];
+  ];*/
 }
 
 class TravelUser {
@@ -294,7 +253,7 @@ class TravelUser {
   static TravelUser javier = TravelUser('Javier',
       'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=334&q=80',);
 
-  static List<TravelUser> users = [alex, mario, luna, lili, javier];
+  
 }
 
 enum StatusTag { popular, event }
